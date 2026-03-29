@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pitch or Perish — ACM Students Chapter · IILM University</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #07070a;
+  --s1:        #0d0d12;
+  --s2:        #121218;
+  --card:      #16161e;
+  --card2:     #1a1a24;
+  --border:    #1e1e2c;
+  --border2:   #272736;
+  --red:       #e8341c;
+  --red2:      #ff5b42;
+  --red-dim:   #5c150b;
+  --amber:     #f5a623;
+  --amber2:    #ffc55a;
+  --green:     #22c55e;
+  --green-dim: #0f3d20;
+  --blue:      #3b82f6;
+  --blue-dim:  #1e3a5f;
+  --purple:    #a855f7;
+  --text:      #eeeae2;
+  --muted:     #6e6c64;
+  --muted2:    #9a9890;
+  --display:   'Bebas Neue', cursive;
+  --sans:      'Syne', sans-serif;
+  --mono:      'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NOISE */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+/* ── NAVIGATION ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(7, 7, 10, 0.92);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  border-bottom: 1px solid var(--border);
+  padding: 0 6vw;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.nav-logo {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+.nav-logo span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.nav-link:hover { color: var(--red); }
+
+.nav-cta {
+  background: var(--red);
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover {
+  background: var(--red2);
+  transform: translateY(-1px);
+}
+
+/* Mobile menu */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px;
+}
+.nav-hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-links { 
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(7, 7, 10, 0.98);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+  .nav-hamburger { display: flex; }
+}
+
+/* ── TICKER ── */
+.ticker {
+  margin-top: 60px;
+  background: var(--red);
+  padding: 0.55rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 2px solid #b82510;
+}
+.ticker-inner {
+  display: inline-block;
+  animation: tick 35s linear infinite;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+}
+@keyframes tick {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 0 6vw;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border2);
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,52,28,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(245,166,35,0.05) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(232,52,28,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,52,28,0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  animation: gridShift 20s linear infinite;
+}
+
+@keyframes gridShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 72px 72px; }
+}
+
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8rem 0 2rem;
+  position: relative; z-index: 1;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: rise 0.7s 0.1s ease forwards;
+}
+.hero-eyebrow::before {
+  content: ''; width: 28px; height: 1px; background: var(--red);
+}
+
+.hero-headline {
+  font-family: var(--display);
+  font-size: clamp(5.5rem, 15vw, 14rem);
+  line-height: 0.86;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  animation: rise 0.7s 0.2s ease forwards;
+}
+.hero-headline .word-pitch { color: var(--text); }
+.hero-headline .word-or    { color: var(--red); display: block; }
+.hero-headline .word-perish {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--muted);
+  display: block;
+}
+
+.hero-tagline {
+  margin-top: 2.2rem;
+  font-size: 0.95rem;
+  color: var(--muted2);
+  letter-spacing: 0.04em;
+  max-width: 520px;
+  line-height: 1.8;
+  opacity: 0;
+  animation: rise 0.7s 0.35s ease forwards;
+}
+.hero-tagline strong { color: var(--amber); font-weight: 700; }
+
+.hero-cta-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  opacity: 0;
+  animation: rise 0.7s 0.45s ease forwards;
+}
+
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  padding: 1rem 2.5rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: var(--red2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(232, 52, 28, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 1rem 2.5rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.hero-footer {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  border-top: 1px solid var(--border2);
+  margin-bottom: 0;
+  opacity: 0;
+  animation: rise 0.7s 0.5s ease forwards;
+}
+.hero-meta {
+  padding: 1.4rem 1.2rem;
+  border-right: 1px solid var(--border2);
+}
+.hero-meta:last-child { border-right: none; }
+.hero-meta-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.hero-meta-val {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.hero-meta-val.accent { color: var(--amber); }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── COUNTDOWN ── */
+.countdown-section {
+  background: var(--s1);
+  padding: 3rem 6vw;
+  border-bottom: 1px solid var(--border);
+}
+
+.countdown-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.countdown-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.countdown-block {
+  text-align: center;
+}
+
+.countdown-val {
+  font-family: var(--display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  color: var(--amber);
+}
+
+.countdown-unit {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+/* ── SECTION SHELL ── */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 6vw; }
+.section { padding: 5.5rem 0; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+
+.sec-label {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 3rem;
+}
+.sec-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--red-dim), transparent);
+}
+.sec-label .num {
+  width: 22px; height: 22px;
+  border: 1px solid var(--red-dim);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.55rem;
+  color: var(--red);
+}
+
+.sec-title {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.sec-desc {
+  font-size: 0.9rem;
+  color: var(--muted2);
+  max-width: 680px;
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+
+/* ── OVERVIEW ── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 2.5rem;
+}
+@media (max-width: 700px) { .overview-grid { grid-template-columns: 1fr; } }
+
+.ov-cell {
+  background: var(--s1);
+  padding: 2rem;
+  transition: background 0.2s;
+}
+.ov-cell:hover { background: var(--card); }
+.ov-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+.ov-title {
+  font-weight: 800; font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--amber); margin-bottom: 0.5rem;
+}
+.ov-body { font-size: 0.83rem; color: var(--muted2); line-height: 1.8; }
+
+/* CHAOS PILLS */
+.chaos-pills {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-top: 2.5rem;
+}
+.pill {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--border2);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted2);
+  border-radius: 100px;
+  background: var(--s2);
+  transition: all 0.2s;
+  cursor: default;
+}
+.pill:hover { border-color: var(--red-dim); color: var(--red2); }
+
+/* ── TIMELINE ── */
+.tl-wrap { position: relative; padding-left: 2px; }
+.tl-wrap::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, var(--red), var(--red-dim) 80%, transparent);
+}
+
+.tl-block { position: relative; padding-left: 2.8rem; padding-bottom: 3rem; }
+.tl-block:last-child { padding-bottom: 0; }
+
+.tl-dot {
+  position: absolute; left: -5px; top: 4px;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--red);
+  box-shadow: 0 0 0 3px rgba(232,52,28,0.15), 0 0 16px rgba(232,52,28,0.4);
+}
+.tl-dot.big {
+  width: 14px; height: 14px; left: -6.5px;
+  background: var(--red);
+  box-shadow: 0 0 0 4px rgba(232,52,28,0.2), 0 0 20px var(--red);
+}
+
+.tl-time {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.tl-name {
+  font-weight: 800; font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.tl-desc {
+  font-size: 0.83rem; color: var(--muted2); line-height: 1.8;
+  max-width: 600px;
+}
+
+.phase-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  margin-bottom: 0.6rem;
+}
+.phase-badge.p1 { background: rgba(58,123,213,0.15); color: #6ba3ff; border: 1px solid rgba(58,123,213,0.25); }
+.phase-badge.p2 { background: rgba(245,166,35,0.12); color: var(--amber2); border: 1px solid rgba(245,166,35,0.22); }
+.phase-badge.p3 { background: rgba(232,52,28,0.12); color: var(--red2); border: 1px solid rgba(232,52,28,0.22); }
+
+/* ── HOURLY JUDGING ── */
+.hours-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+@media (max-width: 600px) { .hours-strip { grid-template-columns: 1fr; } }
+
+.hour-cell {
+  background: var(--s1);
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.hour-cell:hover { background: var(--card); }
+.hour-cell::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--red);
+}
+
+.hour-num {
+  font-family: var(--display); font-size: 4.5rem;
+  line-height: 1; color: var(--red-dim);
+  margin-bottom: 0.4rem;
+}
+.hour-time {
+  font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.15em; color: var(--amber);
+  text-transform: uppercase; margin-bottom: 0.6rem;
+}
+.hour-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.hour-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.75; }
+.hour-badge {
+  display: inline-block; margin-top: 0.9rem;
+  padding: 0.22rem 0.65rem;
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--red-dim); color: #ff8870;
+  border-radius: 2px;
+}
+
+/* ── GAME MECHANICS ── */
+.mechanics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.mech-card {
+  background: var(--card);
+  padding: 2.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.mech-card:hover { background: #1c1c25; }
+.mech-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--red);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.mech-card:hover::after { transform: scaleX(1); }
+
+.mech-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+.mech-title {
+  font-weight: 800; font-size: 0.9rem;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.mech-body { font-size: 0.82rem; color: var(--muted2); line-height: 1.8; }
+
+.credit-meter {
+  margin-top: 0.9rem;
+  height: 3px;
+  background: var(--border2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.credit-meter-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--red), var(--amber));
+  border-radius: 2px;
+}
+
+/* ── TOOLS LIST ── */
+.tools-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 2rem;
+}
+.tool-cell {
+  background: var(--card);
+  padding: 1.4rem 1.2rem;
+  display: flex; flex-direction: column; gap: 0.4rem;
+  transition: background 0.2s;
+}
+.tool-cell:hover { background: #1a1a22; }
+.tool-name {
+  font-weight: 700; font-size: 0.85rem;
+  color: var(--text);
+}
+.tool-cost {
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; color: var(--amber);
+}
+.tool-bar {
+  margin-top: 0.4rem;
+  height: 2px;
+  background: var(--border2);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.tool-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--red), var(--amber));
+  border-radius: 1px;
+}
+
+/* ── CHAOS EVENTS ── */
+.chaos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.chaos-card {
+  border: 1px solid var(--border2);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--s2);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.chaos-card:hover {
+  border-color: var(--red-dim);
+  transform: translateY(-2px);
+}
+
+.chaos-card-icon { font-size: 1.5rem; margin-bottom: 0.7rem; display: block; }
+.chaos-card-title {
+  font-weight: 800; font-size: 0.82rem;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  margin-bottom: 0.4rem;
+}
+.chaos-card-body { font-size: 0.78rem; color: var(--muted2); line-height: 1.75; }
+
+.chaos-tag {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 0.18rem 0.55rem;
+  font-family: var(--mono); font-size: 0.55rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border-radius: 2px;
+}
+.chaos-tag.negative { background: rgba(232,52,28,0.12); color: var(--red2); border: 1px solid var(--red-dim); }
+.chaos-tag.positive { background: rgba(34,197,94,0.1); color: #4ddf87; border: 1px solid rgba(34,197,94,0.2); }
+.chaos-tag.wild { background: rgba(168,85,247,0.10); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+
+/* ── TEAM ROLES ── */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+@media (max-width: 800px) {
+  .roles-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 440px) {
+  .roles-grid { grid-template-columns: 1fr; }
+}
+
+.role-cell {
+  background: var(--card);
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.role-cell:hover { background: #1c1c26; }
+
+.role-ghost {
+  position: absolute;
+  right: -0.5rem; bottom: -1.5rem;
+  font-family: var(--display);
+  font-size: 6.5rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border2);
+  user-select: none;
+  pointer-events: none;
+  transition: -webkit-text-stroke-color 0.3s;
+}
+.role-cell:hover .role-ghost { -webkit-text-stroke-color: var(--red-dim); }
+
+.role-chip {
+  display: inline-block;
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--amber);
+  border: 1px solid rgba(245,166,35,0.2);
+  padding: 0.18rem 0.55rem;
+  border-radius: 2px;
+  margin-bottom: 0.9rem;
+}
+.role-abbr-big {
+  font-family: var(--display);
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.role-full {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted2);
+  margin-bottom: 0.8rem;
+}
+.role-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.75; }
+
+/* ── CREDIT SYSTEM PREVIEW ── */
+.credit-preview {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.credit-preview::after {
+  content: '100';
+  position: absolute; right: -1rem; bottom: -2rem;
+  font-family: var(--display);
+  font-size: 12rem;
+  color: rgba(232,52,28,0.04);
+  line-height: 1;
+  user-select: none;
+}
+
+.credit-row {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 0.85rem;
+}
+.credit-row:last-child { margin-bottom: 0; }
+
+.credit-row .tool-nm {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text);
+  min-width: 120px;
+}
+
+.credit-bar-bg {
+  flex: 1;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.credit-bar-fill {
+  height: 100%;
+  background: var(--red);
+  border-radius: 2px;
+}
+
+.credit-cost {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  min-width: 70px;
+  text-align: right;
+}
+
+/* ── SURVIVAL MODE ── */
+.survival-banner {
+  border: 1px solid var(--red-dim);
+  background: rgba(92,21,11,0.15);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.survival-banner::before {
+  content: 'SURVIVAL MODE';
+  position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--display);
+  font-size: 7rem;
+  color: rgba(232,52,28,0.05);
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.survival-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 600px) { .survival-grid { grid-template-columns: 1fr; } }
+
+.survival-col-title {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.survival-col-title.no  { color: var(--red); }
+.survival-col-title.yes { color: var(--green); }
+
+.survival-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.survival-item {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 0.83rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 3px;
+}
+.survival-item.no  { background: rgba(232,52,28,0.08); color: var(--muted2); }
+.survival-item.yes { background: rgba(34,197,94,0.08);  color: var(--muted2); }
+.survival-item .si-icon { font-size: 0.9rem; flex-shrink: 0; }
+
+/* ── JUDGING CRITERIA ── */
+.criteria-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+.criteria-row {
+  display: flex; align-items: center; gap: 1.5rem;
+  background: var(--s1);
+  padding: 1.4rem 2rem;
+  transition: background 0.15s;
+}
+.criteria-row:hover { background: var(--card); }
+
+.criteria-num {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  color: var(--red-dim);
+  min-width: 36px;
+  line-height: 1;
+}
+.criteria-icon { font-size: 1.3rem; }
+.criteria-text { flex: 1; }
+.criteria-title {
+  font-weight: 700; font-size: 0.95rem;
+  color: var(--text); margin-bottom: 0.1rem;
+}
+.criteria-sub { font-size: 0.78rem; color: var(--muted); }
+
+.criteria-weight {
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; color: var(--amber);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── LEADERBOARD MOCK ── */
+.leaderboard-mock {
+  border: 1px solid var(--border2);
+  background: var(--s2);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.lb-header {
+  display: grid;
+  grid-template-columns: 50px 1fr 120px 100px;
+  padding: 0.8rem 1.5rem;
+  background: var(--border);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  gap: 1rem;
+}
+
+.lb-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 120px 100px;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  gap: 1rem;
+  transition: background 0.15s;
+}
+.lb-row:last-child { border-bottom: none; }
+.lb-row:hover { background: var(--card); }
+
+.lb-rank {
+  font-family: var(--display); font-size: 1.8rem;
+  line-height: 1; color: var(--muted);
+}
+.lb-rank.r1 { color: var(--amber); }
+.lb-rank.r2 { color: var(--muted2); }
+.lb-rank.r3 { color: #c87533; }
+
+.lb-team { font-weight: 700; font-size: 0.88rem; }
+.lb-team-sub { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); margin-top: 0.1rem; }
+
+.lb-bar-wrap {}
+.lb-bar-label {
+  font-family: var(--mono); font-size: 0.62rem;
+  color: var(--amber2); margin-bottom: 0.3rem;
+}
+.lb-bar-bg { height: 4px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+.lb-bar-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(to right, var(--red), var(--amber));
+}
+
+.lb-status {
+  text-align: right;
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+.lb-status.safe      { background: rgba(34,197,94,0.1);  color: var(--green);   border: 1px solid rgba(34,197,94,0.2); }
+.lb-status.caution   { background: rgba(245,166,35,0.1); color: var(--amber2);  border: 1px solid rgba(245,166,35,0.2); }
+.lb-status.survival  { background: rgba(232,52,28,0.1);  color: var(--red2);    border: 1px solid var(--red-dim); }
+
+/* ── BLACK MARKET ── */
+.blackmarket {
+  background: #0a0005;
+  border: 1px solid #2a1a30;
+  padding: 3rem;
+  position: relative; overflow: hidden;
+  margin-top: 2.5rem;
+}
+.blackmarket::before {
+  content: '★ BLACK MARKET ★';
+  position: absolute; right: -2rem; bottom: -1rem;
+  font-family: var(--display);
+  font-size: 6rem;
+  color: rgba(168,85,247,0.04);
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.bm-label {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--purple); margin-bottom: 1.5rem;
+  border: 1px solid rgba(168,85,247,0.25);
+  padding: 0.3rem 0.75rem; border-radius: 2px;
+  background: rgba(168,85,247,0.06);
+}
+
+.bm-title {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  line-height: 1; margin-bottom: 0.8rem;
+  color: var(--purple);
+}
+
+.bm-sub { font-size: 0.85rem; color: var(--muted2); max-width: 560px; line-height: 1.85; margin-bottom: 2rem; }
+
+.bm-deals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: #2a1a30;
+  border: 1px solid #2a1a30;
+}
+
+.bm-deal {
+  background: #0f0714;
+  padding: 1.5rem;
+  transition: background 0.2s;
+}
+.bm-deal:hover { background: #130a1a; }
+
+.bm-deal-icon { font-size: 1.4rem; margin-bottom: 0.6rem; display: block; }
+.bm-deal-title {
+  font-weight: 700; font-size: 0.82rem;
+  color: var(--purple); margin-bottom: 0.4rem;
+}
+.bm-deal-body { font-size: 0.77rem; color: var(--muted); line-height: 1.75; }
+.bm-deal-cost {
+  display: inline-block; margin-top: 0.7rem;
+  font-family: var(--mono); font-size: 0.6rem;
+  padding: 0.18rem 0.5rem;
+  background: rgba(168,85,247,0.1);
+  color: var(--purple);
+  border: 1px solid rgba(168,85,247,0.2);
+  border-radius: 2px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ── TAGLINES SECTION ── */
+.taglines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.tagline-cell {
+  background: var(--card);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: background 0.2s;
+  cursor: default;
+}
+.tagline-cell:hover { background: #1a1a22; }
+.tagline-cell:hover .tagline-text { color: var(--red2); }
+.tagline-label {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1rem;
+}
+.tagline-text {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  line-height: 1.1;
+  color: var(--text);
+  transition: color 0.2s;
+}
+
+/* ── REGISTRATION FORM ── */
+.register-section {
+  background: var(--s1);
+  padding: 5rem 6vw;
+  border-top: 1px solid var(--border);
+}
+
+.register-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.register-form {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 500px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  transition: border-color 0.2s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.form-input::placeholder {
+  color: var(--muted);
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.form-select:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.form-submit {
+  margin-top: 1rem;
+  background: var(--red);
+  color: #fff;
+  padding: 1rem 2rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.form-submit:hover {
+  background: var(--red2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(232, 52, 28, 0.3);
+}
+
+/* ── FAQ ── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.faq-item {
+  background: var(--card);
+  overflow: hidden;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+.faq-question:hover {
+  background: var(--card2);
+}
+
+.faq-q-text {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.faq-toggle {
+  font-size: 1.5rem;
+  color: var(--red);
+  transition: transform 0.3s;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-answer-inner {
+  padding: 0 2rem 1.5rem;
+  font-size: 0.85rem;
+  color: var(--muted2);
+  line-height: 1.8;
+}
+
+.faq-item.active .faq-toggle {
+  transform: rotate(45deg);
+}
+
+.faq-item.active .faq-answer {
+  max-height: 300px;
+}
+
+/* ── QUOTE FOOTER ── */
+.quote-footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border2);
+  padding: 4rem 6vw;
+  text-align: center;
+  position: relative; overflow: hidden; z-index: 1;
+}
+.quote-footer::before {
+  content: '💸';
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 20rem;
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+.qf-sub {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1.2rem;
+}
+.qf-quote {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 1.1;
+  color: var(--text);
+  max-width: 800px;
+  margin: 0 auto 1rem;
+}
+.qf-quote em { color: var(--red); font-style: normal; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3.5rem 6vw;
+  border-top: 1px solid var(--border2);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+  position: relative; z-index: 1;
+}
+.footer-logo {
+  font-family: var(--display);
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+}
+.footer-logo span { color: var(--red); }
+
+.footer-right { text-align: right; }
+.footer-line {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.footer-line strong { color: var(--muted2); }
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+.footer-social a:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ── SCROLL TO TOP ── */
+.scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s;
+  z-index: 100;
+}
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-top:hover {
+  background: var(--red2);
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">ACM <span>×</span> IILM</div>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" href="#overview">Overview</a>
+      <a class="nav-link" href="#timeline">Timeline</a>
+      <a class="nav-link" href="#mechanics">Mechanics</a>
+      <a class="nav-link" href="#credits">Credits</a>
+      <a class="nav-link" href="#roles">Roles</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <button class="nav-cta" onclick="scrollToRegister()">Register Now</button>
+    </div>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-inner">
+    🚀 PITCH OR PERISH &nbsp;·&nbsp; ACM Students Chapter · IILM University, Greater Noida &nbsp;·&nbsp; 15 April 2026 &nbsp;·&nbsp; Build Fast. Think Smart. Survive the Chaos. &nbsp;·&nbsp; 100 Credits. 3 Hours. 1 Winner. &nbsp;·&nbsp; Ideas Are Easy. Execution Under Pressure Is Everything. &nbsp;·&nbsp;
+    🚀 PITCH OR PERISH &nbsp;·&nbsp; ACM Students Chapter · IILM University, Greater Noida &nbsp;·&nbsp; 15 April 2026 &nbsp;·&nbsp; Build Fast. Think Smart. Survive the Chaos. &nbsp;·&nbsp; 100 Credits. 3 Hours. 1 Winner. &nbsp;·&nbsp; Ideas Are Easy. Execution Under Pressure Is Everything. &nbsp;·&nbsp;
+  </span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-center">
+    <p class="hero-eyebrow">ACM Students Chapter &nbsp;·&nbsp; IILM University &nbsp;·&nbsp; Greater Noida</p>
+
+    <h1 class="hero-headline">
+      <span class="word-pitch">Pitch</span>
+      <span class="word-or">or</span>
+      <span class="word-perish">Perish</span>
+    </h1>
+
+    <p class="hero-tagline">
+      A high-intensity, Gen-Z startup simulation where you go from
+      <strong>idea → prototype → pitch</strong> in just 3 hours —
+      navigating budget cuts, competitor threats, and live judge interventions.
+      Only the smartest, fastest, most adaptable teams survive.
+    </p>
+
+    <div class="hero-cta-group">
+      <button class="btn-primary" onclick="scrollToRegister()">Register Your Team</button>
+      <a href="#overview" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+
+  <div class="hero-footer">
+    <div class="hero-meta">
+      <div class="hero-meta-label">Date</div>
+      <div class="hero-meta-val accent">15 April 2026</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Duration</div>
+      <div class="hero-meta-val">3 Hours</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Starting Credits</div>
+      <div class="hero-meta-val accent">100 Credits</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Team Size</div>
+      <div class="hero-meta-val">4 Roles</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Organized by</div>
+      <div class="hero-meta-val">ACM Chapter</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Venue</div>
+      <div class="hero-meta-val">IILM University</div>
+    </div>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <div class="countdown-wrap">
+    <p class="countdown-label">Event Starts In</p>
+    <div class="countdown-timer" id="countdown">
+      <div class="countdown-block">
+        <div class="countdown-val" id="days">00</div>
+        <div class="countdown-unit">Days</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-val" id="hours">00</div>
+        <div class="countdown-unit">Hours</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-val" id="minutes">00</div>
+        <div class="countdown-unit">Minutes</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-val" id="seconds">00</div>
+        <div class="countdown-unit">Seconds</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<div class="wrap">
+  <section class="section" id="overview">
+    <p class="sec-label"><span class="num">01</span> Event Overview</p>
+    <h2 class="sec-title">What is Pitch or Perish?</h2>
+    <p class="sec-desc">
+      This isn't just a hackathon. It's a startup battlefield — where teams don't just build,
+      they <em>survive</em>. Every decision costs credits. Every hour brings a new challenge.
+      And the judges? They're not just watching.
+    </p>
+
+    <div class="overview-grid">
+      <div class="ov-cell">
+        <span class="ov-icon">💡</span>
+        <div class="ov-title">Idea to Product in 3 Hours</div>
+        <div class="ov-body">Teams ideate, prototype, and pitch a real startup concept within a 3-hour window. No pre-built solutions. Everything happens live on the day.</div>
+      </div>
+      <div class="ov-cell">
+        <span class="ov-icon">💰</span>
+        <div class="ov-title">Credit-Based Tool Economy</div>
+        <div class="ov-body">Want to use Figma, ChatGPT, or Claude? It'll cost you credits. Every tool access is a strategic resource decision. Spend wisely or go dark.</div>
+      </div>
+      <div class="ov-cell">
+        <span class="ov-icon">⚡</span>
+        <div class="ov-title">Live Judge Interventions</div>
+        <div class="ov-body">Judges can cut your credits, trigger market disruptions, or hand you a bonus opportunity — at any time. Adaptability isn't optional; it's survival.</div>
+      </div>
+      <div class="ov-cell">
+        <span class="ov-icon">🧭</span>
+        <div class="ov-title">Mentors &amp; Hourly Reviews</div>
+        <div class="ov-body">Each team is paired with a dedicated mentor for strategic guidance. Judges evaluate progress every hour — no coasting, no last-minute saves.</div>
+      </div>
+    </div>
+
+    <div class="chaos-pills">
+      <div class="pill">💸 Budget Cuts</div>
+      <div class="pill">⚔️ Competitor Threats</div>
+      <div class="pill">🧩 Resource Limits</div>
+      <div class="pill">📉 Market Disruptions</div>
+      <div class="pill">🚀 Bonus Opportunities</div>
+      <div class="pill">🕵️ Idea Theft</div>
+      <div class="pill">👥 User Drops</div>
+    </div>
+  </section>
+</div>
+
+<!-- EVENT FLOW -->
+<div class="wrap">
+  <section class="section" id="timeline">
+    <p class="sec-label"><span class="num">02</span> Event Flow · 15 April 2026</p>
+    <h2 class="sec-title">How the Day Unfolds</h2>
+
+    <div style="margin-top:3rem;" class="tl-wrap">
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">Pre-Event Phase</div>
+        <div class="tl-name">Promotions &amp; Registrations</div>
+        <div class="tl-desc">Campus-wide promotion goes live across social media, notice boards, and ACM communication channels. Teams register via Google Form. Final team confirmations are issued before the event date.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">9:45 AM – 10:50 AM</div>
+        <div class="tl-name">Check-in &amp; Onboarding</div>
+        <div class="tl-desc">Teams arrive at the venue. A minimum of 1 representative per team must check in. Mentors are introduced, credits are distributed, and the complete rule briefing takes place.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot big"></div>
+        <div class="tl-time">11:00 AM — Kickoff</div>
+        <div class="tl-name">🚀 The Clock Starts</div>
+        <div class="tl-desc">Judges address all teams. Twist rules are revealed. 100 credits hit every team's account simultaneously. The 3-hour survival clock begins. No warm-up, no second chances.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">11:00 AM – 11:30 AM</div>
+        <div class="tl-name">
+          <span class="phase-badge p1">Phase 1 · Ideation 💡</span><br/>
+          Brainstorm &amp; Lock Your Idea
+        </div>
+        <div class="tl-desc">Teams brainstorm, debate, and commit to a startup idea. The CEO leads the vision. No pivoting after Phase 1 — unless a Chaos Event forces it.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">11:30 AM – 1:30 PM</div>
+        <div class="tl-name">
+          <span class="phase-badge p2">Phase 2 · Prototyping 🛠️</span><br/>
+          Build Your MVP
+        </div>
+        <div class="tl-desc">Teams build a Minimum Viable Product using tools purchased with credits. CTO leads execution. Hourly judging checkpoints keep pressure on. Chaos Events can trigger at any time.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">1:30 PM – 2:00 PM</div>
+        <div class="tl-name">
+          <span class="phase-badge p3">Phase 3 · Pitching 🎤</span><br/>
+          Present to the Judges
+        </div>
+        <div class="tl-desc">Teams present their idea, prototype, and business model to the judging panel. The CMO leads the pitch. Judges score on innovation, execution, adaptability, and pitch quality. One team survives supreme.</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- HOURLY JUDGING -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">03</span> Judging Rounds</p>
+    <h2 class="sec-title">Evaluated Every Hour</h2>
+    <p class="sec-desc">
+      There are no checkpoints at the end — judges are watching throughout. Every hour brings a formal review where your strategy, progress, and credit balance are all on the table.
+    </p>
+
+    <div class="hours-strip">
+      <div class="hour-cell">
+        <div class="hour-num">01</div>
+        <div class="hour-time">12:00 PM · End of Hour 1</div>
+        <div class="hour-title">Idea Viability Review</div>
+        <div class="hour-desc">Judges assess idea clarity, early prototype direction, and team coordination. Credits may be adjusted. First Chaos Events may be triggered here.</div>
+        <span class="hour-badge">Round 1</span>
+      </div>
+      <div class="hour-cell">
+        <div class="hour-num">02</div>
+        <div class="hour-time">1:00 PM · End of Hour 2</div>
+        <div class="hour-title">Prototype Progress Check</div>
+        <div class="hour-desc">MVP status review. Judges introduce the heaviest Chaos Events here — user drops, competitor copies, funding cuts. Teams must demonstrate real-time adaptability.</div>
+        <span class="hour-badge">Round 2</span>
+      </div>
+      <div class="hour-cell">
+        <div class="hour-num">03</div>
+        <div class="hour-time">2:00 PM · End of Hour 3</div>
+        <div class="hour-title">Final Pitch &amp; Verdict</div>
+        <div class="hour-desc">Full presentation to the judging panel. Credit balance, survival record, and pitch quality all feed into the final score. The scoreboard is final.</div>
+        <span class="hour-badge">Final Round</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- GAME MECHANICS -->
+<div class="wrap">
+  <section class="section" id="mechanics">
+    <p class="sec-label"><span class="num">04</span> Game Mechanics — The Twist Layer</p>
+    <h2 class="sec-title">The Rules That Break Rules</h2>
+
+    <div class="mechanics-grid" style="margin-top:2.5rem;">
+      <div class="mech-card">
+        <span class="mech-icon">💰</span>
+        <div class="mech-title">Credit System</div>
+        <div class="mech-body">Every team starts with 100 credits. These are your fuel — spent to access AI and design tools. No credits, no tools. Strategic resource allocation separates the survivors from the rest.</div>
+        <div class="credit-meter"><div class="credit-meter-fill" style="width:100%"></div></div>
+      </div>
+      <div class="mech-card">
+        <span class="mech-icon">⚖️</span>
+        <div class="mech-title">Dynamic Credit Changes</div>
+        <div class="mech-body">Judges hold full authority over your credit balance. At any judging round, credits can be boosted for exceptional performance — or slashed for poor decisions. Nobody's safe.</div>
+        <div class="credit-meter"><div class="credit-meter-fill" style="width:60%"></div></div>
+      </div>
+      <div class="mech-card">
+        <span class="mech-icon">🧭</span>
+        <div class="mech-title">Mentor Assignment</div>
+        <div class="mech-body">One mentor is assigned to each team. Mentors guide strategy, help navigate Chaos Events, and facilitate coordination — but they don't build. Your execution is entirely on you.</div>
+        <div class="credit-meter"><div class="credit-meter-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-top:3rem; margin-bottom:0.5rem;">Purchasable Tools (Credit Cost Illustrative)</p>
+    <div class="tools-list">
+      <div class="tool-cell">
+        <div class="tool-name">Figma</div>
+        <div class="tool-cost">~20 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:40%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">ChatGPT</div>
+        <div class="tool-cost">~25 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:50%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Claude</div>
+        <div class="tool-cost">~25 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:50%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Bolt</div>
+        <div class="tool-cost">~30 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:60%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Lovable</div>
+        <div class="tool-cost">~30 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:60%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Google Docs</div>
+        <div class="tool-cost">FREE</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <p style="font-family:var(--mono); font-size:0.6rem; color:var(--muted); margin-top:0.9rem; line-height:1.8;">
+      * Final credit costs will be confirmed by the organizing committee. Judges may adjust tool costs during the event.
+    </p>
+  </section>
+</div>
+
+<!-- CHAOS EVENTS -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">05</span> Chaos Events — Surprise Challenges</p>
+    <h2 class="sec-title">Expect the Unexpected</h2>
+    <p class="sec-desc">
+      At any point, judges may introduce real-world startup disruptions designed to test your team's resilience, creativity, and adaptability under pressure.
+    </p>
+
+    <div class="chaos-grid">
+      <div class="chaos-card">
+        <span class="chaos-card-icon">📉</span>
+        <div class="chaos-card-title">User Drop</div>
+        <div class="chaos-card-body">A simulated user segment suddenly abandons your product. Pivot your positioning or justify your value prop under the new market reality.</div>
+        <span class="chaos-tag negative">-15 Credits</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">🕵️</span>
+        <div class="chaos-card-title">Competitor Copy</div>
+        <div class="chaos-card-body">Judges declare another team has replicated your core idea. You must differentiate immediately — in features, pitch, or market angle. Originality is survival.</div>
+        <span class="chaos-tag wild">Wild Card</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">💸</span>
+        <div class="chaos-card-title">Funding Crash</div>
+        <div class="chaos-card-body">Credits are reduced without warning. Re-evaluate your tool strategy instantly. Can you deliver the same prototype on less fuel?</div>
+        <span class="chaos-tag negative">-20 Credits</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">🚀</span>
+        <div class="chaos-card-title">Investor Boost</div>
+        <div class="chaos-card-body">A simulated investor sees potential in your direction. Bonus credits are airdropped — but only to teams that were actively building when the event fires.</div>
+        <span class="chaos-tag positive">+25 Credits</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">🔄</span>
+        <div class="chaos-card-title">Pivot Mandate</div>
+        <div class="chaos-card-body">Judges announce a required change in your product direction or target market. You have 15 minutes to adapt. No debate. No extensions.</div>
+        <span class="chaos-tag wild">Forced Pivot</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CREDIT SYSTEM -->
+<div class="wrap">
+  <section class="section" id="credits">
+    <p class="sec-label"><span class="num">06</span> Credit System</p>
+    <h2 class="sec-title">Your Currency. Your Strategy.</h2>
+    <p class="sec-desc">
+      Credits aren't just points — they determine how far your team can go and how smart you'll have to be to survive. Run out, and you enter Survival Mode.
+    </p>
+
+    <div class="credit-preview">
+      <div class="credit-row">
+        <span class="tool-nm">Figma</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:40%"></div></div>
+        <span class="credit-cost">~20 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">ChatGPT</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:50%"></div></div>
+        <span class="credit-cost">~25 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">Claude</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:50%"></div></div>
+        <span class="credit-cost">~25 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">Bolt / Lovable</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:60%"></div></div>
+        <span class="credit-cost">~30 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">Mentor Time</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:30%"></div></div>
+        <span class="credit-cost">~15 credits/10min</span>
+      </div>
+    </div>
+
+    <!-- SURVIVAL MODE -->
+    <div class="survival-banner">
+      <div class="survival-grid">
+        <div>
+          <div class="survival-col-title no">❌ Not Allowed in Survival Mode</div>
+          <div class="survival-list">
+            <div class="survival-item no"><span class="si-icon">🤖</span> No AI tools of any kind</div>
+            <div class="survival-item no"><span class="si-icon">🧭</span> No mentor access</div>
+            <div class="survival-item no"><span class="si-icon">🎨</span> No premium design tools</div>
+            <div class="survival-item no"><span class="si-icon">⚡</span> No power boosts</div>
+          </div>
+        </div>
+        <div>
+          <div class="survival-col-title yes">✅ Still Allowed</div>
+          <div class="survival-list">
+            <div class="survival-item yes"><span class="si-icon">🧠</span> Raw thinking & manual work</div>
+            <div class="survival-item yes"><span class="si-icon">📄</span> Google Docs / Slides (free)</div>
+            <div class="survival-item yes"><span class="si-icon">🌐</span> Controlled internet browsing</div>
+            <div class="survival-item yes"><span class="si-icon">🎯</span> Earn credits via challenges</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLACK MARKET -->
+    <div class="blackmarket">
+      <span class="bm-label">⚠ Optional Mechanic · Elite Level</span>
+      <div class="bm-title">Black Market</div>
+      <p class="bm-sub">Teams can trade credits, buy competitor intel, and make risky back-room deals with other teams — outside the official economy. High risk. High reward.</p>
+
+      <div class="bm-deals">
+        <div class="bm-deal">
+          <span class="bm-deal-icon">🕵️</span>
+          <div class="bm-deal-title">Competitor Intel</div>
+          <div class="bm-deal-body">Pay to receive hints about rival team strategies.</div>
+          <span class="bm-deal-cost">20 Credits</span>
+        </div>
+        <div class="bm-deal">
+          <span class="bm-deal-icon">🤝</span>
+          <div class="bm-deal-title">Credit Trading</div>
+          <div class="bm-deal-body">Two teams can transfer credits for negotiated exchanges.</div>
+          <span class="bm-deal-cost">Negotiated</span>
+        </div>
+        <div class="bm-deal">
+          <span class="bm-deal-icon">🎲</span>
+          <div class="bm-deal-title">High-Stakes Gamble</div>
+          <div class="bm-deal-body">Bet credits on a challenge. Win double or lose all.</div>
+          <span class="bm-deal-cost">Double or Nothing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TEAM ROLES -->
+<div class="wrap">
+  <section class="section" id="roles">
+    <p class="sec-label"><span class="num">07</span> Team Structure</p>
+    <h2 class="sec-title">4 Roles. One Mission.</h2>
+    <p class="sec-desc">
+      Every team must have exactly four members, each assigned a distinct C-suite role. Role distribution must be declared at registration and cannot change during the event.
+    </p>
+
+    <div class="roles-grid">
+      <div class="role-cell">
+        <div class="role-ghost">CEO</div>
+        <div class="role-chip">Founder Track</div>
+        <div class="role-abbr-big">CEO</div>
+        <div class="role-full">Chief Executive Officer</div>
+        <div class="role-desc">Owns the team's vision and overall direction. Manages the credit budget, makes final strategic calls, and delivers the pitch to judges.</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-ghost">CTO</div>
+        <div class="role-chip">Tech Track</div>
+        <div class="role-abbr-big">CTO</div>
+        <div class="role-full">Chief Technology Officer</div>
+        <div class="role-desc">Architects and builds the prototype. Decides which tools to purchase, leads product development, and owns technical feasibility.</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-ghost">CMO</div>
+        <div class="role-chip">Growth Track</div>
+        <div class="role-abbr-big">CMO</div>
+        <div class="role-full">Chief Marketing Officer</div>
+        <div class="role-desc">Shapes the brand, narrative, and pitch deck. Leads audience messaging, demo flow, and ensures the story lands with the judges.</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-ghost">COO</div>
+        <div class="role-chip">Ops Track</div>
+        <div class="role-abbr-big">COO</div>
+        <div class="role-full">Chief Operating Officer</div>
+        <div class="role-desc">Manages team coordination and tempo. Tracks credit usage, liaises with the team mentor, and ensures nothing falls through the cracks.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- JUDGING CRITERIA -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">08</span> Judging Criteria</p>
+    <h2 class="sec-title">How Winners Are Picked</h2>
+
+    <div class="criteria-list" style="margin-top:2.5rem;">
+      <div class="criteria-row">
+        <div class="criteria-num">01</div>
+        <div class="criteria-icon">💡</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Innovation &amp; Creativity</div>
+          <div class="criteria-sub">How original is the idea? Does it solve a real problem in a non-obvious way?</div>
+        </div>
+        <div class="criteria-weight">Core</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">02</div>
+        <div class="criteria-icon">⚡</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Execution Speed</div>
+          <div class="criteria-sub">How much was built in 3 hours? Quality and pace of prototype development.</div>
+        </div>
+        <div class="criteria-weight">Core</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">03</div>
+        <div class="criteria-icon">📊</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Business Viability</div>
+          <div class="criteria-sub">Is there a realistic market? Does the team understand unit economics and user value?</div>
+        </div>
+        <div class="criteria-weight">Core</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">04</div>
+        <div class="criteria-icon">🔁</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Adaptability to Twists</div>
+          <div class="criteria-sub">How well did the team respond to Chaos Events? Was the pivot smart and swift?</div>
+        </div>
+        <div class="criteria-weight">Differentiator</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">05</div>
+        <div class="criteria-icon">🎤</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Pitch Quality</div>
+          <div class="criteria-sub">Clarity, confidence, storytelling, and the ability to handle judge questions under pressure.</div>
+        </div>
+        <div class="criteria-weight">Differentiator</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- LEADERBOARD PREVIEW -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">09</span> Live Leaderboard</p>
+    <h2 class="sec-title">Everyone Can See Everything</h2>
+    <p class="sec-desc">
+      The leaderboard runs live throughout the event displaying every team's current credit balance and status. Transparency creates pressure.
+    </p>
+
+    <div class="leaderboard-mock">
+      <div class="lb-header">
+        <span>#</span>
+        <span>Team</span>
+        <span>Credits</span>
+        <span style="text-align:right;">Status</span>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank r1">1</div>
+        <div>
+          <div class="lb-team">Team Alpha</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">87 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:87%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status safe">Safe</span></div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank r2">2</div>
+        <div>
+          <div class="lb-team">Team Nexus</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">62 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:62%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status safe">Safe</span></div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank r3">3</div>
+        <div>
+          <div class="lb-team">Team Pivot</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">35 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:35%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status caution">Caution</span></div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank" style="color:var(--red-dim);">4</div>
+        <div>
+          <div class="lb-team">Team Zero</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">0 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:2%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status survival">Survival</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TAGLINES -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">10</span> Event Taglines</p>
+    <h2 class="sec-title">The Words That Define It</h2>
+
+    <div class="taglines-grid" style="margin-top:2.5rem;">
+      <div class="tagline-cell">
+        <div class="tagline-label">Option A</div>
+        <div class="tagline-text">Build.<br/>Pivot.<br/>Survive.</div>
+      </div>
+      <div class="tagline-cell">
+        <div class="tagline-label">Option B</div>
+        <div class="tagline-text">Startup<br/>Chaos<br/>Begins Here.</div>
+      </div>
+      <div class="tagline-cell">
+        <div class="tagline-label">Option C</div>
+        <div class="tagline-text">Pitch Fast…<br/>Or Perish.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FAQ -->
+<div class="wrap">
+  <section class="section" id="faq">
+    <p class="sec-label"><span class="num">11</span> FAQ</p>
+    <h2 class="sec-title">Frequently Asked Questions</h2>
+
+    <div class="faq-list" style="margin-top:2.5rem;">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do I need prior startup experience?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No! Pitch or Perish is designed for all skill levels. Whether you're a first-time founder or an experienced builder, the event tests your creativity, teamwork, and adaptability — not your resume.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Can I bring a pre-built project?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Everything must be built from scratch during the 3-hour event window. Pre-built solutions, templates, or code snippets prepared before the event are strictly prohibited and will result in disqualification.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What happens if we run out of credits?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">You enter Survival Mode. You lose access to all paid tools (AI, design software, mentors) but can still use free resources like Google Docs. You can earn credits back through mini-challenges and judge bonuses.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How are teams formed?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Teams register as complete units of 4 members with pre-assigned roles (CEO, CTO, CMO, COO). We do not facilitate team matching — come with your crew ready to compete.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Is there a participation fee?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Registration details including any participation fees will be announced through official ACM Students Chapter channels. Stay tuned to our social media for updates.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- REGISTRATION -->
+<section class="register-section" id="register">
+  <div class="register-wrap">
+    <p class="sec-label" style="justify-content:center;"><span class="num">12</span> Registration</p>
+    <h2 class="sec-title" style="text-align:center;">Register Your Team</h2>
+    <p class="sec-desc" style="text-align:center; margin: 0 auto 2rem;">
+      Ready to compete? Fill in your team details below. Make sure all 4 roles are assigned before submitting.
+    </p>
+
+    <form class="register-form" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label class="form-label">Team Name</label>
+        <input type="text" class="form-input" placeholder="Enter your team name" required>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">CEO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Executive Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CEO Email</label>
+          <input type="email" class="form-input" placeholder="ceo@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">CTO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Technology Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CTO Email</label>
+          <input type="email" class="form-input" placeholder="cto@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">CMO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Marketing Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CMO Email</label>
+          <input type="email" class="form-input" placeholder="cmo@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">COO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Operating Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">COO Email</label>
+          <input type="email" class="form-input" placeholder="coo@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">College / University</label>
+        <input type="text" class="form-input" placeholder="Your institution name" required>
+      </div>
+
+      <button type="submit" class="form-submit">Register Team →</button>
+    </form>
+  </div>
+</section>
+
+<!-- QUOTE FOOTER -->
+<div class="quote-footer">
+  <p class="qf-sub">Official Tagline · Pitch or Perish</p>
+  <p class="qf-quote">
+    "In startups, money isn't everything…<br/>
+    but <em>running out of it</em> is."
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">ACM <span>×</span> IILM</div>
+    <div style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:0.4rem;">
+      ACM Students Chapter · IILM University, Greater Noida
+    </div>
+    <div class="footer-social">
+      <a href="#" title="Instagram">📷</a>
+      <a href="#" title="LinkedIn">💼</a>
+      <a href="#" title="Twitter">🐦</a>
+      <a href="#" title="Discord">💬</a>
+    </div>
+  </div>
+  <div class="footer-right">
+    <div class="footer-line"><strong>Event:</strong> Pitch or Perish</div>
+    <div class="footer-line"><strong>Date:</strong> 15 April 2026</div>
+    <div class="footer-line"><strong>Duration:</strong> 3 Hours</div>
+    <div class="footer-line"><strong>Venue:</strong> IILM University, Greater Noida</div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+<script>
+// Countdown Timer
+function updateCountdown() {
+  const eventDate = new Date('April 15, 2026 11:00:00').getTime();
+  const now = new Date().getTime();
+  const distance = eventDate - now;
+
+  if (distance < 0) {
+    document.getElementById('countdown').innerHTML = '<p style="font-family:var(--display);font-size:3rem;color:var(--red);">EVENT IN PROGRESS!</p>';
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Mobile Menu Toggle
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('active');
+}
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('active');
+  });
+});
+
+// FAQ Toggle
+function toggleFaq(element) {
+  const item = element.parentElement;
+  const isActive = item.classList.contains('active');
+  
+  // Close all others
+  document.querySelectorAll('.faq-item').forEach(faq => {
+    faq.classList.remove('active');
+  });
+  
+  // Toggle current
+  if (!isActive) {
+    item.classList.add('active');
+  }
+}
+
+// Form Submission
+function handleSubmit(e) {
+  e.preventDefault();
+  alert('Thank you for registering! We will contact you with further details soon.');
+}
+
+// Scroll to Register
+function scrollToRegister() {
+  document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Scroll to Top Button
+window.addEventListener('scroll', () => {
+  const scrollTop = document.getElementById('scrollTop');
+  if (window.scrollY > 500) {
+    scrollTop.classList.add('visible');
+  } else {
+    scrollTop.classList.remove('visible');
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Animate elements on scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.section').forEach(section => {
+  section.style.opacity = '0';
+  section.style.transform = 'translateY(30px)';
+  section.style.transition = 'all 0.6s ease';
+  observer.observe(section);
+});
+</script>
+
+</body>
+</html>

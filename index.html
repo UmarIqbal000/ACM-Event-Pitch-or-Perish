@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pitch or Perish — ACM Students Chapter · IILM University</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">ACM <span>×</span> IILM</div>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" href="#overview">Overview</a>
+      <a class="nav-link" href="#timeline">Timeline</a>
+      <a class="nav-link" href="#mechanics">Mechanics</a>
+      <a class="nav-link" href="#credits">Credits</a>
+      <a class="nav-link" href="#roles">Roles</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <button class="nav-cta" onclick="scrollToRegister()">Register Now</button>
+    </div>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-inner">
+    🚀 PITCH OR PERISH &nbsp;·&nbsp; ACM Students Chapter · IILM University, Greater Noida &nbsp;·&nbsp; 15 April 2026 &nbsp;·&nbsp; Build Fast. Think Smart. Survive the Chaos. &nbsp;·&nbsp; 100 Credits. 3 Hours. 1 Winner. &nbsp;·&nbsp; Ideas Are Easy. Execution Under Pressure Is Everything. &nbsp;·&nbsp;
+    🚀 PITCH OR PERISH &nbsp;·&nbsp; ACM Students Chapter · IILM University, Greater Noida &nbsp;·&nbsp; 15 April 2026 &nbsp;·&nbsp; Build Fast. Think Smart. Survive the Chaos. &nbsp;·&nbsp; 100 Credits. 3 Hours. 1 Winner. &nbsp;·&nbsp; Ideas Are Easy. Execution Under Pressure Is Everything. &nbsp;·&nbsp;
+  </span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-center">
+    <p class="hero-eyebrow">ACM Students Chapter &nbsp;·&nbsp; IILM University &nbsp;·&nbsp; Greater Noida</p>
+
+    <h1 class="hero-headline">
+      <span class="word-pitch">Pitch</span>
+      <span class="word-or">or</span>
+      <span class="word-perish">Perish</span>
+    </h1>
+
+    <p class="hero-tagline">
+      A high-intensity, Gen-Z startup simulation where you go from
+      <strong>idea → prototype → pitch</strong> in just 3 hours —
+      navigating budget cuts, competitor threats, and live judge interventions.
+      Only the smartest, fastest, most adaptable teams survive.
+    </p>
+
+    <div class="hero-cta-group">
+      <button class="btn-primary" onclick="scrollToRegister()">Register Your Team</button>
+      <a href="#overview" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+
+  <div class="hero-footer">
+    <div class="hero-meta">
+      <div class="hero-meta-label">Date</div>
+      <div class="hero-meta-val accent">15 April 2026</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Duration</div>
+      <div class="hero-meta-val">3 Hours</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Starting Credits</div>
+      <div class="hero-meta-val accent">100 Credits</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Team Size</div>
+      <div class="hero-meta-val">4 Roles</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Organized by</div>
+      <div class="hero-meta-val">ACM Chapter</div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-label">Venue</div>
+      <div class="hero-meta-val">IILM University</div>
+    </div>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <div class="countdown-wrap">
+    <p class="countdown-label">Event Starts In</p>
+    <div class="countdown-timer" id="countdown">
+      <div class="countdown-block">
+        <div class="countdown-val" id="days">00</div>
+        <div class="countdown-unit">Days</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-val" id="hours">00</div>
+        <div class="countdown-unit">Hours</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-val" id="minutes">00</div>
+        <div class="countdown-unit">Minutes</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-val" id="seconds">00</div>
+        <div class="countdown-unit">Seconds</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<div class="wrap">
+  <section class="section" id="overview">
+    <p class="sec-label"><span class="num">01</span> Event Overview</p>
+    <h2 class="sec-title">What is Pitch or Perish?</h2>
+    <p class="sec-desc">
+      This isn't just a hackathon. It's a startup battlefield — where teams don't just build,
+      they <em>survive</em>. Every decision costs credits. Every hour brings a new challenge.
+      And the judges? They're not just watching.
+    </p>
+
+    <div class="overview-grid">
+      <div class="ov-cell">
+        <span class="ov-icon">💡</span>
+        <div class="ov-title">Idea to Product in 3 Hours</div>
+        <div class="ov-body">Teams ideate, prototype, and pitch a real startup concept within a 3-hour window. No pre-built solutions. Everything happens live on the day.</div>
+      </div>
+      <div class="ov-cell">
+        <span class="ov-icon">💰</span>
+        <div class="ov-title">Credit-Based Tool Economy</div>
+        <div class="ov-body">Want to use Figma, ChatGPT, or Claude? It'll cost you credits. Every tool access is a strategic resource decision. Spend wisely or go dark.</div>
+      </div>
+      <div class="ov-cell">
+        <span class="ov-icon">⚡</span>
+        <div class="ov-title">Live Judge Interventions</div>
+        <div class="ov-body">Judges can cut your credits, trigger market disruptions, or hand you a bonus opportunity — at any time. Adaptability isn't optional; it's survival.</div>
+      </div>
+      <div class="ov-cell">
+        <span class="ov-icon">🧭</span>
+        <div class="ov-title">Mentors &amp; Hourly Reviews</div>
+        <div class="ov-body">Each team is paired with a dedicated mentor for strategic guidance. Judges evaluate progress every hour — no coasting, no last-minute saves.</div>
+      </div>
+    </div>
+
+    <div class="chaos-pills">
+      <div class="pill">💸 Budget Cuts</div>
+      <div class="pill">⚔️ Competitor Threats</div>
+      <div class="pill">🧩 Resource Limits</div>
+      <div class="pill">📉 Market Disruptions</div>
+      <div class="pill">🚀 Bonus Opportunities</div>
+      <div class="pill">🕵️ Idea Theft</div>
+      <div class="pill">👥 User Drops</div>
+    </div>
+  </section>
+</div>
+
+<!-- EVENT FLOW -->
+<div class="wrap">
+  <section class="section" id="timeline">
+    <p class="sec-label"><span class="num">02</span> Event Flow · 15 April 2026</p>
+    <h2 class="sec-title">How the Day Unfolds</h2>
+
+    <div style="margin-top:3rem;" class="tl-wrap">
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">Pre-Event Phase</div>
+        <div class="tl-name">Promotions &amp; Registrations</div>
+        <div class="tl-desc">Campus-wide promotion goes live across social media, notice boards, and ACM communication channels. Teams register via Google Form. Final team confirmations are issued before the event date.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">9:45 AM – 10:50 AM</div>
+        <div class="tl-name">Check-in &amp; Onboarding</div>
+        <div class="tl-desc">Teams arrive at the venue. A minimum of 1 representative per team must check in. Mentors are introduced, credits are distributed, and the complete rule briefing takes place.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot big"></div>
+        <div class="tl-time">11:00 AM — Kickoff</div>
+        <div class="tl-name">🚀 The Clock Starts</div>
+        <div class="tl-desc">Judges address all teams. Twist rules are revealed. 100 credits hit every team's account simultaneously. The 3-hour survival clock begins. No warm-up, no second chances.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">11:00 AM – 11:30 AM</div>
+        <div class="tl-name">
+          <span class="phase-badge p1">Phase 1 · Ideation 💡</span><br/>
+          Brainstorm &amp; Lock Your Idea
+        </div>
+        <div class="tl-desc">Teams brainstorm, debate, and commit to a startup idea. The CEO leads the vision. No pivoting after Phase 1 — unless a Chaos Event forces it.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">11:30 AM – 1:30 PM</div>
+        <div class="tl-name">
+          <span class="phase-badge p2">Phase 2 · Prototyping 🛠️</span><br/>
+          Build Your MVP
+        </div>
+        <div class="tl-desc">Teams build a Minimum Viable Product using tools purchased with credits. CTO leads execution. Hourly judging checkpoints keep pressure on. Chaos Events can trigger at any time.</div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-dot"></div>
+        <div class="tl-time">1:30 PM – 2:00 PM</div>
+        <div class="tl-name">
+          <span class="phase-badge p3">Phase 3 · Pitching 🎤</span><br/>
+          Present to the Judges
+        </div>
+        <div class="tl-desc">Teams present their idea, prototype, and business model to the judging panel. The CMO leads the pitch. Judges score on innovation, execution, adaptability, and pitch quality. One team survives supreme.</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- HOURLY JUDGING -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">03</span> Judging Rounds</p>
+    <h2 class="sec-title">Evaluated Every Hour</h2>
+    <p class="sec-desc">
+      There are no checkpoints at the end — judges are watching throughout. Every hour brings a formal review where your strategy, progress, and credit balance are all on the table.
+    </p>
+
+    <div class="hours-strip">
+      <div class="hour-cell">
+        <div class="hour-num">01</div>
+        <div class="hour-time">12:00 PM · End of Hour 1</div>
+        <div class="hour-title">Idea Viability Review</div>
+        <div class="hour-desc">Judges assess idea clarity, early prototype direction, and team coordination. Credits may be adjusted. First Chaos Events may be triggered here.</div>
+        <span class="hour-badge">Round 1</span>
+      </div>
+      <div class="hour-cell">
+        <div class="hour-num">02</div>
+        <div class="hour-time">1:00 PM · End of Hour 2</div>
+        <div class="hour-title">Prototype Progress Check</div>
+        <div class="hour-desc">MVP status review. Judges introduce the heaviest Chaos Events here — user drops, competitor copies, funding cuts. Teams must demonstrate real-time adaptability.</div>
+        <span class="hour-badge">Round 2</span>
+      </div>
+      <div class="hour-cell">
+        <div class="hour-num">03</div>
+        <div class="hour-time">2:00 PM · End of Hour 3</div>
+        <div class="hour-title">Final Pitch &amp; Verdict</div>
+        <div class="hour-desc">Full presentation to the judging panel. Credit balance, survival record, and pitch quality all feed into the final score. The scoreboard is final.</div>
+        <span class="hour-badge">Final Round</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- GAME MECHANICS -->
+<div class="wrap">
+  <section class="section" id="mechanics">
+    <p class="sec-label"><span class="num">04</span> Game Mechanics — The Twist Layer</p>
+    <h2 class="sec-title">The Rules That Break Rules</h2>
+
+    <div class="mechanics-grid" style="margin-top:2.5rem;">
+      <div class="mech-card">
+        <span class="mech-icon">💰</span>
+        <div class="mech-title">Credit System</div>
+        <div class="mech-body">Every team starts with 100 credits. These are your fuel — spent to access AI and design tools. No credits, no tools. Strategic resource allocation separates the survivors from the rest.</div>
+        <div class="credit-meter"><div class="credit-meter-fill" style="width:100%"></div></div>
+      </div>
+      <div class="mech-card">
+        <span class="mech-icon">⚖️</span>
+        <div class="mech-title">Dynamic Credit Changes</div>
+        <div class="mech-body">Judges hold full authority over your credit balance. At any judging round, credits can be boosted for exceptional performance — or slashed for poor decisions. Nobody's safe.</div>
+        <div class="credit-meter"><div class="credit-meter-fill" style="width:60%"></div></div>
+      </div>
+      <div class="mech-card">
+        <span class="mech-icon">🧭</span>
+        <div class="mech-title">Mentor Assignment</div>
+        <div class="mech-body">One mentor is assigned to each team. Mentors guide strategy, help navigate Chaos Events, and facilitate coordination — but they don't build. Your execution is entirely on you.</div>
+        <div class="credit-meter"><div class="credit-meter-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <p style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-top:3rem; margin-bottom:0.5rem;">Purchasable Tools (Credit Cost Illustrative)</p>
+    <div class="tools-list">
+      <div class="tool-cell">
+        <div class="tool-name">Figma</div>
+        <div class="tool-cost">~20 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:40%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">ChatGPT</div>
+        <div class="tool-cost">~25 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:50%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Claude</div>
+        <div class="tool-cost">~25 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:50%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Bolt</div>
+        <div class="tool-cost">~30 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:60%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Lovable</div>
+        <div class="tool-cost">~30 credits</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:60%"></div></div>
+      </div>
+      <div class="tool-cell">
+        <div class="tool-name">Google Docs</div>
+        <div class="tool-cost">FREE</div>
+        <div class="tool-bar"><div class="tool-bar-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <p style="font-family:var(--mono); font-size:0.6rem; color:var(--muted); margin-top:0.9rem; line-height:1.8;">
+      * Final credit costs will be confirmed by the organizing committee. Judges may adjust tool costs during the event.
+    </p>
+  </section>
+</div>
+
+<!-- CHAOS EVENTS -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">05</span> Chaos Events — Surprise Challenges</p>
+    <h2 class="sec-title">Expect the Unexpected</h2>
+    <p class="sec-desc">
+      At any point, judges may introduce real-world startup disruptions designed to test your team's resilience, creativity, and adaptability under pressure.
+    </p>
+
+    <div class="chaos-grid">
+      <div class="chaos-card">
+        <span class="chaos-card-icon">📉</span>
+        <div class="chaos-card-title">User Drop</div>
+        <div class="chaos-card-body">A simulated user segment suddenly abandons your product. Pivot your positioning or justify your value prop under the new market reality.</div>
+        <span class="chaos-tag negative">-15 Credits</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">🕵️</span>
+        <div class="chaos-card-title">Competitor Copy</div>
+        <div class="chaos-card-body">Judges declare another team has replicated your core idea. You must differentiate immediately — in features, pitch, or market angle. Originality is survival.</div>
+        <span class="chaos-tag wild">Wild Card</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">💸</span>
+        <div class="chaos-card-title">Funding Crash</div>
+        <div class="chaos-card-body">Credits are reduced without warning. Re-evaluate your tool strategy instantly. Can you deliver the same prototype on less fuel?</div>
+        <span class="chaos-tag negative">-20 Credits</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">🚀</span>
+        <div class="chaos-card-title">Investor Boost</div>
+        <div class="chaos-card-body">A simulated investor sees potential in your direction. Bonus credits are airdropped — but only to teams that were actively building when the event fires.</div>
+        <span class="chaos-tag positive">+25 Credits</span>
+      </div>
+      <div class="chaos-card">
+        <span class="chaos-card-icon">🔄</span>
+        <div class="chaos-card-title">Pivot Mandate</div>
+        <div class="chaos-card-body">Judges announce a required change in your product direction or target market. You have 15 minutes to adapt. No debate. No extensions.</div>
+        <span class="chaos-tag wild">Forced Pivot</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CREDIT SYSTEM -->
+<div class="wrap">
+  <section class="section" id="credits">
+    <p class="sec-label"><span class="num">06</span> Credit System</p>
+    <h2 class="sec-title">Your Currency. Your Strategy.</h2>
+    <p class="sec-desc">
+      Credits aren't just points — they determine how far your team can go and how smart you'll have to be to survive. Run out, and you enter Survival Mode.
+    </p>
+
+    <div class="credit-preview">
+      <div class="credit-row">
+        <span class="tool-nm">Figma</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:40%"></div></div>
+        <span class="credit-cost">~20 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">ChatGPT</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:50%"></div></div>
+        <span class="credit-cost">~25 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">Claude</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:50%"></div></div>
+        <span class="credit-cost">~25 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">Bolt / Lovable</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:60%"></div></div>
+        <span class="credit-cost">~30 credits</span>
+      </div>
+      <div class="credit-row">
+        <span class="tool-nm">Mentor Time</span>
+        <div class="credit-bar-bg"><div class="credit-bar-fill" style="width:30%"></div></div>
+        <span class="credit-cost">~15 credits/10min</span>
+      </div>
+    </div>
+
+    <!-- SURVIVAL MODE -->
+    <div class="survival-banner">
+      <div class="survival-grid">
+        <div>
+          <div class="survival-col-title no">❌ Not Allowed in Survival Mode</div>
+          <div class="survival-list">
+            <div class="survival-item no"><span class="si-icon">🤖</span> No AI tools of any kind</div>
+            <div class="survival-item no"><span class="si-icon">🧭</span> No mentor access</div>
+            <div class="survival-item no"><span class="si-icon">🎨</span> No premium design tools</div>
+            <div class="survival-item no"><span class="si-icon">⚡</span> No power boosts</div>
+          </div>
+        </div>
+        <div>
+          <div class="survival-col-title yes">✅ Still Allowed</div>
+          <div class="survival-list">
+            <div class="survival-item yes"><span class="si-icon">🧠</span> Raw thinking & manual work</div>
+            <div class="survival-item yes"><span class="si-icon">📄</span> Google Docs / Slides (free)</div>
+            <div class="survival-item yes"><span class="si-icon">🌐</span> Controlled internet browsing</div>
+            <div class="survival-item yes"><span class="si-icon">🎯</span> Earn credits via challenges</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLACK MARKET -->
+    <div class="blackmarket">
+      <span class="bm-label">⚠ Optional Mechanic · Elite Level</span>
+      <div class="bm-title">Black Market</div>
+      <p class="bm-sub">Teams can trade credits, buy competitor intel, and make risky back-room deals with other teams — outside the official economy. High risk. High reward.</p>
+
+      <div class="bm-deals">
+        <div class="bm-deal">
+          <span class="bm-deal-icon">🕵️</span>
+          <div class="bm-deal-title">Competitor Intel</div>
+          <div class="bm-deal-body">Pay to receive hints about rival team strategies.</div>
+          <span class="bm-deal-cost">20 Credits</span>
+        </div>
+        <div class="bm-deal">
+          <span class="bm-deal-icon">🤝</span>
+          <div class="bm-deal-title">Credit Trading</div>
+          <div class="bm-deal-body">Two teams can transfer credits for negotiated exchanges.</div>
+          <span class="bm-deal-cost">Negotiated</span>
+        </div>
+        <div class="bm-deal">
+          <span class="bm-deal-icon">🎲</span>
+          <div class="bm-deal-title">High-Stakes Gamble</div>
+          <div class="bm-deal-body">Bet credits on a challenge. Win double or lose all.</div>
+          <span class="bm-deal-cost">Double or Nothing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TEAM ROLES -->
+<div class="wrap">
+  <section class="section" id="roles">
+    <p class="sec-label"><span class="num">07</span> Team Structure</p>
+    <h2 class="sec-title">4 Roles. One Mission.</h2>
+    <p class="sec-desc">
+      Every team must have exactly four members, each assigned a distinct C-suite role. Role distribution must be declared at registration and cannot change during the event.
+    </p>
+
+    <div class="roles-grid">
+      <div class="role-cell">
+        <div class="role-ghost">CEO</div>
+        <div class="role-chip">Founder Track</div>
+        <div class="role-abbr-big">CEO</div>
+        <div class="role-full">Chief Executive Officer</div>
+        <div class="role-desc">Owns the team's vision and overall direction. Manages the credit budget, makes final strategic calls, and delivers the pitch to judges.</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-ghost">CTO</div>
+        <div class="role-chip">Tech Track</div>
+        <div class="role-abbr-big">CTO</div>
+        <div class="role-full">Chief Technology Officer</div>
+        <div class="role-desc">Architects and builds the prototype. Decides which tools to purchase, leads product development, and owns technical feasibility.</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-ghost">CMO</div>
+        <div class="role-chip">Growth Track</div>
+        <div class="role-abbr-big">CMO</div>
+        <div class="role-full">Chief Marketing Officer</div>
+        <div class="role-desc">Shapes the brand, narrative, and pitch deck. Leads audience messaging, demo flow, and ensures the story lands with the judges.</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-ghost">COO</div>
+        <div class="role-chip">Ops Track</div>
+        <div class="role-abbr-big">COO</div>
+        <div class="role-full">Chief Operating Officer</div>
+        <div class="role-desc">Manages team coordination and tempo. Tracks credit usage, liaises with the team mentor, and ensures nothing falls through the cracks.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- JUDGING CRITERIA -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">08</span> Judging Criteria</p>
+    <h2 class="sec-title">How Winners Are Picked</h2>
+
+    <div class="criteria-list" style="margin-top:2.5rem;">
+      <div class="criteria-row">
+        <div class="criteria-num">01</div>
+        <div class="criteria-icon">💡</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Innovation &amp; Creativity</div>
+          <div class="criteria-sub">How original is the idea? Does it solve a real problem in a non-obvious way?</div>
+        </div>
+        <div class="criteria-weight">Core</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">02</div>
+        <div class="criteria-icon">⚡</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Execution Speed</div>
+          <div class="criteria-sub">How much was built in 3 hours? Quality and pace of prototype development.</div>
+        </div>
+        <div class="criteria-weight">Core</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">03</div>
+        <div class="criteria-icon">📊</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Business Viability</div>
+          <div class="criteria-sub">Is there a realistic market? Does the team understand unit economics and user value?</div>
+        </div>
+        <div class="criteria-weight">Core</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">04</div>
+        <div class="criteria-icon">🔁</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Adaptability to Twists</div>
+          <div class="criteria-sub">How well did the team respond to Chaos Events? Was the pivot smart and swift?</div>
+        </div>
+        <div class="criteria-weight">Differentiator</div>
+      </div>
+      <div class="criteria-row">
+        <div class="criteria-num">05</div>
+        <div class="criteria-icon">🎤</div>
+        <div class="criteria-text">
+          <div class="criteria-title">Pitch Quality</div>
+          <div class="criteria-sub">Clarity, confidence, storytelling, and the ability to handle judge questions under pressure.</div>
+        </div>
+        <div class="criteria-weight">Differentiator</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- LEADERBOARD PREVIEW -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">09</span> Live Leaderboard</p>
+    <h2 class="sec-title">Everyone Can See Everything</h2>
+    <p class="sec-desc">
+      The leaderboard runs live throughout the event displaying every team's current credit balance and status. Transparency creates pressure.
+    </p>
+
+    <div class="leaderboard-mock">
+      <div class="lb-header">
+        <span>#</span>
+        <span>Team</span>
+        <span>Credits</span>
+        <span style="text-align:right;">Status</span>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank r1">1</div>
+        <div>
+          <div class="lb-team">Team Alpha</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">87 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:87%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status safe">Safe</span></div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank r2">2</div>
+        <div>
+          <div class="lb-team">Team Nexus</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">62 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:62%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status safe">Safe</span></div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank r3">3</div>
+        <div>
+          <div class="lb-team">Team Pivot</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">35 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:35%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status caution">Caution</span></div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank" style="color:var(--red-dim);">4</div>
+        <div>
+          <div class="lb-team">Team Zero</div>
+          <div class="lb-team-sub">CEO · CTO · CMO · COO</div>
+        </div>
+        <div class="lb-bar-wrap">
+          <div class="lb-bar-label">0 Credits</div>
+          <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:2%"></div></div>
+        </div>
+        <div style="text-align:right;"><span class="lb-status survival">Survival</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TAGLINES -->
+<div class="wrap">
+  <section class="section">
+    <p class="sec-label"><span class="num">10</span> Event Taglines</p>
+    <h2 class="sec-title">The Words That Define It</h2>
+
+    <div class="taglines-grid" style="margin-top:2.5rem;">
+      <div class="tagline-cell">
+        <div class="tagline-label">Option A</div>
+        <div class="tagline-text">Build.<br/>Pivot.<br/>Survive.</div>
+      </div>
+      <div class="tagline-cell">
+        <div class="tagline-label">Option B</div>
+        <div class="tagline-text">Startup<br/>Chaos<br/>Begins Here.</div>
+      </div>
+      <div class="tagline-cell">
+        <div class="tagline-label">Option C</div>
+        <div class="tagline-text">Pitch Fast…<br/>Or Perish.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FAQ -->
+<div class="wrap">
+  <section class="section" id="faq">
+    <p class="sec-label"><span class="num">11</span> FAQ</p>
+    <h2 class="sec-title">Frequently Asked Questions</h2>
+
+    <div class="faq-list" style="margin-top:2.5rem;">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do I need prior startup experience?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No! Pitch or Perish is designed for all skill levels. Whether you're a first-time founder or an experienced builder, the event tests your creativity, teamwork, and adaptability — not your resume.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Can I bring a pre-built project?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Everything must be built from scratch during the 3-hour event window. Pre-built solutions, templates, or code snippets prepared before the event are strictly prohibited and will result in disqualification.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What happens if we run out of credits?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">You enter Survival Mode. You lose access to all paid tools (AI, design software, mentors) but can still use free resources like Google Docs. You can earn credits back through mini-challenges and judge bonuses.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How are teams formed?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Teams register as complete units of 4 members with pre-assigned roles (CEO, CTO, CMO, COO). We do not facilitate team matching — come with your crew ready to compete.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Is there a participation fee?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Registration details including any participation fees will be announced through official ACM Students Chapter channels. Stay tuned to our social media for updates.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- REGISTRATION -->
+<section class="register-section" id="register">
+  <div class="register-wrap">
+    <p class="sec-label" style="justify-content:center;"><span class="num">12</span> Registration</p>
+    <h2 class="sec-title" style="text-align:center;">Register Your Team</h2>
+    <p class="sec-desc" style="text-align:center; margin: 0 auto 2rem;">
+      Ready to compete? Fill in your team details below. Make sure all 4 roles are assigned before submitting.
+    </p>
+
+    <form class="register-form" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label class="form-label">Team Name</label>
+        <input type="text" class="form-input" placeholder="Enter your team name" required>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">CEO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Executive Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CEO Email</label>
+          <input type="email" class="form-input" placeholder="ceo@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">CTO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Technology Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CTO Email</label>
+          <input type="email" class="form-input" placeholder="cto@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">CMO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Marketing Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CMO Email</label>
+          <input type="email" class="form-input" placeholder="cmo@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">COO Name</label>
+          <input type="text" class="form-input" placeholder="Chief Operating Officer" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">COO Email</label>
+          <input type="email" class="form-input" placeholder="coo@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">College / University</label>
+        <input type="text" class="form-input" placeholder="Your institution name" required>
+      </div>
+
+      <button type="submit" class="form-submit">Register Team →</button>
+    </form>
+  </div>
+</section>
+
+<!-- QUOTE FOOTER -->
+<div class="quote-footer">
+  <p class="qf-sub">Official Tagline · Pitch or Perish</p>
+  <p class="qf-quote">
+    "In startups, money isn't everything…<br/>
+    but <em>running out of it</em> is."
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">ACM <span>×</span> IILM</div>
+    <div style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:0.4rem;">
+      ACM Students Chapter · IILM University, Greater Noida
+    </div>
+    <div class="footer-social">
+      <a href="#" title="Instagram">📷</a>
+      <a href="#" title="LinkedIn">💼</a>
+      <a href="#" title="Twitter">🐦</a>
+      <a href="#" title="Discord">💬</a>
+    </div>
+  </div>
+  <div class="footer-right">
+    <div class="footer-line"><strong>Event:</strong> Pitch or Perish</div>
+    <div class="footer-line"><strong>Date:</strong> 15 April 2026</div>
+    <div class="footer-line"><strong>Duration:</strong> 3 Hours</div>
+    <div class="footer-line"><strong>Venue:</strong> IILM University, Greater Noida</div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
